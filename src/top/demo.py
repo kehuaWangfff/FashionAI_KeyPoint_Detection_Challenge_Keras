@@ -33,7 +33,7 @@ def demo(modelfile):
         _image_id = _row['image_id']
         _category = _row['image_category']
         imageName = os.path.join("../../data/test", _image_id)
-        print _image_id, _category
+        print(_image_id, _category)
         dtkp = xEval.predict_kp_with_rotate(imageName, _category)
         visualize_keypoint(imageName, _category, dtkp)
 
@@ -45,7 +45,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    print args
+    print(args)
 
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     os.environ["CUDA_VISIBLE_DEVICES"] = str(args.gpuID)

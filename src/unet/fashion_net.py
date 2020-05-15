@@ -32,7 +32,7 @@ class FashionNet(object):
         if show:
             self.model.summary()
             for layer in self.model.layers:
-                print layer.name, layer.trainable
+                print(layer.name, layer.trainable)
 
     def train(self, category, batchSize=8, epochs=20, lrschedule=False):
         trainDt = DataGenerator(category, os.path.join("../../data/train/Annotations", "train_split.csv"))
@@ -42,7 +42,7 @@ class FashionNet(object):
 
         normalizedErrorCallBack = NormalizedErrorCallBack("../../trained_models/", category, True)
 
-        csvlogger = CSVLogger( os.path.join(normalizedErrorCallBack.get_folder_path(),
+        csvlogger = CSVLogger(os.path.join(normalizedErrorCallBack.get_folder_path(),
                                "csv_train_"+self.modelName+"_"+str(datetime.datetime.now().strftime('%H:%M'))+".csv"))
 
         xcallbacks = [normalizedErrorCallBack, csvlogger]

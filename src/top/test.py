@@ -60,7 +60,7 @@ def submission(pklpath):
     trainKeys = xdf.keys()
 
     testdf = pd.read_csv("../../data/test/test.csv")
-    print len(testdf), " samples in test.csv"
+    print(len(testdf), " samples in test.csv")
 
     mdict = dict()
     for xfile in os.listdir(pklpath):
@@ -69,8 +69,8 @@ def submission(pklpath):
             pkl = open(os.path.join(pklpath, xfile))
             mdict[category] = pickle.load(pkl)
 
-    print testdf.keys()
-    print mdict.keys()
+    print(testdf.keys())
+    print(mdict.keys())
 
     submissionDf = pd.DataFrame(columns=trainKeys, index=np.arange(testdf.shape[0]))
     submissionDf = submissionDf.fillna(value='-1_-1_-1')
@@ -84,7 +84,7 @@ def submission(pklpath):
         fill_dataframe(kplst, getKpKeys('all')[1:], _row, image_category)
 
 
-    print len(submissionDf), "save to ",  os.path.join(pklpath, 'submission.csv')
+    print(len(submissionDf), "save to ",  os.path.join(pklpath, 'submission.csv'))
     submissionDf.to_csv( os.path.join(pklpath, 'submission.csv'), index=False )
 
 
@@ -99,7 +99,7 @@ def main_test(savepath, modelpath, augmentFlag):
     valfile = os.path.join(modelpath, 'val.log')
     bestmodels = get_best_single_model(valfile)
 
-    print bestmodels, augmentFlag
+    print (bestmodels, augmentFlag)
 
     xEval = Evaluation('all', bestmodels[0])
 
@@ -109,13 +109,13 @@ def main_test(savepath, modelpath, augmentFlag):
     for category in ['skirt', 'blouse', 'trousers', 'outwear', 'dress']:
         xdict = dict()
         xdf = load_image_names(testfile, category)
-        print len(xdf), " images to process ", category
+        print (len(xdf), " images to process ", category)
 
         count = 0
         for _index, _row in xdf.iterrows():
             count += 1
             if count%1000 == 0:
-                print count, "images have been processed"
+                print (count, "images have been processed")
 
             _image_id = _row['image_id']
             imageName = os.path.join("../../data/test", _image_id)
@@ -129,7 +129,7 @@ def main_test(savepath, modelpath, augmentFlag):
         with open(savefile, 'wb') as xfile:
             pickle.dump(xdict, xfile)
 
-        print "prediction save to ", savefile
+        print("prediction save to ", savefile)
 
 
 if __name__ == "__main__":
@@ -141,7 +141,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    print args
+    print (args)
 
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     os.environ["CUDA_VISIBLE_DEVICES"] = str(args.gpuID)
