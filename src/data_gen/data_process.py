@@ -137,7 +137,7 @@ def rotate_image_with_invrmat(cvmat, rotateAngle):
     ##Make sure cvmat is square?
     height, width, channel = cvmat.shape
 
-    center = ( width//2, height//2)
+    center = (width//2, height//2)
     rotateMatrix = cv2.getRotationMatrix2D(center, rotateAngle, 1.0)
 
     cos, sin = np.abs(rotateMatrix[0,0]), np.abs(rotateMatrix[0, 1])
@@ -195,8 +195,8 @@ def crop_image(cvmat, kpAnnLst, lowLimitRatio, upLimitRatio):
     cropHeight = random.randrange(int(lowLimitRatio*height),  int(upLimitRatio*height))
     cropWidth  = random.randrange(int(lowLimitRatio*width),  int(upLimitRatio*width))
 
-    top_x = random.randrange(0,  width - cropWidth)
-    top_y = random.randrange(0,  height - cropHeight)
+    top_x = random.randrange(0, width-cropWidth)
+    top_y = random.randrange(0, height-cropHeight)
 
     # apply offset for keypoints
     nKpLst = list()
@@ -204,7 +204,7 @@ def crop_image(cvmat, kpAnnLst, lowLimitRatio, upLimitRatio):
         if _kp.visibility == -1:
             _newkp = _kp
         else:
-            _newkp = KpAnno.applyOffset(_kp, (top_x, top_y))
+            _newkp = KpAnno.applyOffset(_kp,(top_x,top_y))
             if _newkp.x <=0 or _newkp.y <=0:
                 # negative location, return original image
                 return cvmat, kpAnnLst

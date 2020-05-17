@@ -1,7 +1,7 @@
 
 import sys
 sys.path.insert(0, "../unet/")
-
+import numpy as np
 from keras.models import *
 from keras.layers import *
 from utils import np_euclidean_l2

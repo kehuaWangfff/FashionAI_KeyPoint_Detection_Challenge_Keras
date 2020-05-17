@@ -32,9 +32,10 @@ def build_resnet101_stack_mask_v3(inputHeight, inputWidth, n_classes, nStack):
 
     g2x_mask = apply_mask_to_output(g2x, input_mask)
 
-    outputs =  [g2x_mask]
+
+    outputs = [g2x_mask]
     for i in range(nStack):
-        s8x, s4x, s2x =  create_stack_refinenet((s8x, s4x, s2x), n_classes, 'stack_'+str(i))
+        s8x, s4x, s2x = create_stack_refinenet((s8x, s4x, s2x), n_classes, 'stack_'+str(i))
         if i == (nStack-1): # last stack with ohem_mask
             s2x_mask = apply_mask_to_output(s2x, input_ohem_mask)
         else:

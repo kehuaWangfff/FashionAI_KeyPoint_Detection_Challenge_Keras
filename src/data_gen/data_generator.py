@@ -40,11 +40,14 @@ class DataGenerator(object):
 
         # train_input: npfloat,  height, width, channels
         # train_gthmap: npfloat, N heatmap + 1 background heatmap,
+        halfTargetHeight=int(targetHeight / 2)
+        halfTargetWidth=int(targetWidth / 2)
+
         train_input = np.zeros((batchSize, targetHeight, targetWidth, 3), dtype=np.float)
-        train_mask = np.zeros((batchSize, targetHeight / 2, targetWidth / 2, getKpNum(self.category) ), dtype=np.float)
-        train_gthmap = np.zeros((batchSize, targetHeight / 2, targetWidth / 2, getKpNum(self.category) ), dtype=np.float)
-        train_ohem_mask = np.zeros((batchSize, targetHeight / 2, targetWidth / 2, getKpNum(self.category) ), dtype=np.float)
-        train_ohem_gthmap = np.zeros((batchSize, targetHeight / 2, targetWidth / 2, getKpNum(self.category) ), dtype=np.float)
+        train_mask = np.zeros((batchSize, halfTargetHeight, halfTargetWidth, getKpNum(self.category) ), dtype=np.float)
+        train_gthmap = np.zeros((batchSize, halfTargetHeight, halfTargetWidth, getKpNum(self.category) ), dtype=np.float)
+        train_ohem_mask = np.zeros((batchSize, halfTargetHeight, halfTargetWidth, getKpNum(self.category) ), dtype=np.float)
+        train_ohem_gthmap = np.zeros((batchSize, halfTargetHeight, halfTargetWidth, getKpNum(self.category) ), dtype=np.float)
 
         ## generator need to be infinite loop
         while 1:

@@ -29,22 +29,27 @@ if __name__ == "__main__":
 
 
     # TensorFlow wizardry
-    config = tf.ConfigProto()
+    config = tf.compat.v1.ConfigProto()
 
     # Don't pre-allocate memory; allocate as-needed
     config.gpu_options.allow_growth = True
 
     # Only allow a total of half the GPU memory to be allocated
-    config.gpu_options.per_process_gpu_memory_fraction = 1.0
+    config.gpu_options.per_process_gpu_memory_fraction = 0.8
 
     # Create a session with the above options specified.
-    k.tensorflow_backend.set_session(tf.Session(config=config))
-
-    if not args.resume :
-        xnet = FashionNet(512, 512, getKpNum(args.category))
-        xnet.build_model(modelName=args.network, show=True)
-        xnet.train(args.category, epochs=args.epochs, batchSize=args.batchSize, lrschedule=args.lrdecay)
+    sess = tf.compat.v1.Session(config=config)
+    category="long sleeve outwear"
+    resume=False
+    network="snet"
+    epochs=50
+    batchSize=32
+    lrdecay=False
+    if not resume :
+        xnet = FashionNet(512, 512, getKpNum(category))
+        xnet.build_model(modelName=network, show=False)
+        xnet.train(category, epochs=epochs, batchSize=batchSize, lrschedule=lrdecay)
     else:
-        xnet = FashionNet(512, 512, getKpNum(args.category))
+        xnet = FashionNet(512, 512, getKpNum(category))
         xnet.resume_train(args.category, args.resumeModel, args.network, args.initEpoch,
                           epochs=args.epochs, batchSize=args.batchSize)

@@ -97,8 +97,16 @@ def getKpKeys(category):
                  'cuff_right_out', 'top_hem_left', 'top_hem_right', 'waistband_left', 'waistband_right', 'hemline_left', 'hemline_right' ,
                  'crotch', 'bottom_left_in' , 'bottom_left_out', 'bottom_right_in' ,'bottom_right_out']
 
+    LongSleeveOutwear_KEYS=['image_id','keys_0', 'keys_1','keys_2','keys_3','keys_4','keys_5','keys_6','keys_7','keys_8','keys_9','keys_10',
+                             'keys_11','keys_12','keys_13','keys_14','keys_15','keys_16','keys_17','keys_18','keys_19','keys_20',
+                             'keys_21','keys_22','keys_23','keys_24','keys_25','keys_26','keys_27','keys_28','keys_29','keys_30','keys_31',
+                             'keys_32','keys_33','keys_34','keys_35','keys_36','keys_37','keys_38']
+
+
     if category == 'skirt':
         return SKIRT_KP_KEYS
+    elif category =='long sleeve outwear':
+        return LongSleeveOutwear_KEYS
     elif category == 'dress':
         return DRESS_KP_KEYS
     elif category == 'trousers':
@@ -127,10 +135,10 @@ def fill_dataframe(kplst, category, dfrow):
 
 
 def get_kp_index_from_allkeys(kpname):
-    ALL_KP_KEYS = ['neckline_left', 'neckline_right', 'center_front', 'shoulder_left', 'shoulder_right',
-                   'armpit_left', 'armpit_right', 'waistline_left', 'waistline_right', 'cuff_left_in', 'cuff_left_out',
-                   'cuff_right_in', 'cuff_right_out', 'top_hem_left', 'top_hem_right', 'waistband_left', 'waistband_right',
-                   'hemline_left', 'hemline_right', 'crotch', 'bottom_left_in', 'bottom_left_out', 'bottom_right_in', 'bottom_right_out']
+    ALL_KP_KEYS = ['keys_0', 'keys_1','keys_2','keys_3','keys_4','keys_5','keys_6','keys_7','keys_8','keys_9','keys_10',
+                             'keys_11','keys_12','keys_13','keys_14','keys_15','keys_16','keys_17','keys_18','keys_19','keys_20',
+                             'keys_21','keys_22','keys_23','keys_24','keys_25','keys_26','keys_27','keys_28','keys_29','keys_30','keys_31',
+                             'keys_32','keys_33','keys_34','keys_35','keys_36','keys_37','keys_38']
 
     return ALL_KP_KEYS.index(kpname)
 

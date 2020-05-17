@@ -241,7 +241,7 @@ def load_backbone_res101net(inputHeight, inputWidth):
     from resnet101 import ResNet101
     xresnet = ResNet101(weights='imagenet', include_top=False, input_shape=(inputHeight, inputWidth, 3))
 
-    xresnet.load_weights("../../data/resnet101_weights_tf.h5", by_name=True)
+    xresnet.load_weights("/home/kh/.keras/models/resnet101_weights_tf.h5", by_name=True)
 
     lf16x = xresnet.get_layer('res4b22_relu').output
     lf8x = xresnet.get_layer('res3b2_relu').output
